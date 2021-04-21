@@ -3,7 +3,7 @@
 	<form action="" id="login-frm">
 		<div class="form-group">
 			<label for="" class="control-label">Email</label>
-			<input type="email" name="email" required="" class="form-control">
+			<input type="email" name="email" required="" class="form-control"> 
 		</div>
 		<div class="form-group">
 			<label for="" class="control-label">Password</label>

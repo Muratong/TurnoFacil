@@ -47,11 +47,10 @@ include ('admin/db_connect.php')
 	<div id="turnos"></div>
 	</div>
               
-			
-	
 		</form>
 	</div>
 </div>
+
 <script type="text/javascript" src="js/turno.js"></script>
 <script>
 

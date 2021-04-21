@@ -67,7 +67,10 @@
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Guardar</button>
+        <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+data-preference-id="291527786-6ccc3e43-d5bb-40f6-918c-69c707cc9d84" data-source="button" onclick="$('#uni_modal form').submit()" >
+       </script>
+        
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
       </div>
       </div>
