@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="precio">
-				<h3><span class="fa fa-check">Acreditacion Instantanea</span></h3>
+				<h3>$<span>1.500</span></h3>
 			</div>
 
 			<div class="descripcion">
@@ -35,18 +35,18 @@
 			</div>
 
 			<div class="enlace">
-				<a href="#">Comprar</a>
+				<a href="#">Pagar</a>
 			</div>
 		</div>
 
 		<div class="tabla">
 			<div class="titulo">
-				<span class="fa fa-diamond"></span>
+				<img src="img/mp.png" alt="" width="80">
 				<h2>DEBITO - CREDITO</h2>
 			</div>
 
 			<div class="precio">
-				<h3>$ <span>50</span></h3>
+				<h3>$<span>1.500</span></h3>
 			</div>
 
 			<div class="descripcion">
@@ -59,7 +59,7 @@
 			</div>
 
 			<div class="enlace">
-				<a href="#">Comprar</a>
+				<a href="finalizar.php">Pagar</a>
 			</div>
 		</div>
 

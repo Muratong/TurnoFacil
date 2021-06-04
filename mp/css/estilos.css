@@ -7,7 +7,7 @@
 }
 
 body {
-	background: url('../img/bg.jpg');
+	background-color: gray;
 	-webkit-background-size: cover;
 	background-size: cover;
 	font-family: Raleway;
@@ -87,7 +87,10 @@ header {
 	font-size: 30px;
 	color: #00CD2A;
 }
-
+.finalizar h2 {
+	font-size: 30px;
+	color: red;
+}
 .precio h3 span {
 	font-size: 50px;
 	margin-left: 5px;
@@ -111,6 +114,19 @@ header {
 	display: inline-block;
 	text-decoration: none;
 	background: #00CD2A;
+	color: #fff;
+	margin: 40px 0;
+	padding: 10px 40px;
+	border-radius: 50px;
+	font-size: 22px;
+	text-transform: uppercase;
+	transition: .3s;
+}
+
+.enlace1 a {
+	display: inline-block;
+	text-decoration: none;
+	background: red;
 	color: #fff;
 	margin: 40px 0;
 	padding: 10px 40px;

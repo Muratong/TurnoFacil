@@ -84,7 +84,7 @@ $("#date").change(function(e)
 					alert_toast("El turno se Genero con exito!");
 					end_load();
 					$('.modal').modal("hide");
-					window.location.replace("https://mpago.la/1GmzRm8");
+					window.location.replace("mp/index.php");
 				}else{
 					$('#msg').html('<div class="alert alert-danger">'+resp.msg+'</div>')
 					end_load();
