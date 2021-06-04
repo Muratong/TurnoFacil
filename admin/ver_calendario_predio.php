@@ -29,13 +29,13 @@
 		</div>
 	<hr>
 		<div class="row">
-			<button class="btn btn-primary btn-sm col-md-3 mr-2" type="button" id="edit">Editar</button>
+			<button class="btn btn-primary btn-sm col-md-3 mr-2" type="button" id="editar">Editar</button>
 			<button class="btn btn-secondary btn-sm col-md-3  " type="button" data-dismiss="modal" id="">Cerrar</button>
 		</div>
 	</div>
 </div>
 <script>
-	$('#edit').click(function(){
-		uni_modal("Edit "+$('#uni_modal .modal-title').html(),'manage_doctor_schedule.php?did=<?php echo $_GET['id'] ?>','mid-large');
+	$('#editar').click(function(){
+		uni_modal("Editar "+$('#uni_modal .modal-title').html(),'manage_calendario_predios.php?did=<?php echo $_GET['id'] ?>','');
 	})
 </script>

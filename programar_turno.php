@@ -18,10 +18,10 @@ include ('admin/db_connect.php')
       <div class="form-group">
         <label for="" class="control-label">
            <?php foreach($pre_arr as $row): ?>
-          <p><h5>Estas queriendo sacar turno en el Predio.</h5> </p>
+          <p><h5>Estas Por Solicitar un turno en el Predio.</h5> </p>
             <h2> <strong> <?php echo "".$row['name'].','.$row['name_pref']. '</strong> </h2>
             <p> Ubicado en: <strong> '.$row['clinic_address'] ?></strong></p>
-           <p><h5> ¿Quieres continuar?</h5></p>
+           <p><h5> ¿Quieres Continuar?</h5></p>
         </label>
         <?php endforeach; ?>
       </div>

@@ -29,31 +29,8 @@ header("location:index.php?page=home");
 		height: calc(100%);
 		background:white;
 	}
-	#login-right{
-		position: absolute;
-		right:0;
-		width:40%;
-		height: calc(100%);
-		background:white;
-		display: flex;
-		align-items: center;
-	}
-	#login-left{
-		position: absolute;
-		left:0;
-		width:60%;
-		height: calc(100%);
-		background:#59b6ec61;
-		display: flex;
-		align-items: center;
-		background: url(../assets/img/canchaconfort.jpg);
-	    background-repeat: no-repeat;
-	    background-size: cover;
-	}
-	#login-right .card{
-		margin: auto
-		
-	}
+	
+	
 	.logo {
     margin: auto;
     font-size: 6rem;
@@ -68,12 +45,18 @@ header("location:index.php?page=home");
 <body>
 
 
-  <main id="main" class=" bg-dark">
-  		<div id="login-left">
-  			
-  		</div>
-  	<div id="login-right" style="background:url(../assets/img/futbol.jpg) ">
-  			<div class="card col-md-8" >
+    <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+              <h1 class="text-black">Bienvenido!</h1>
+              <p class="text-lead text-black">Reserva Fútbol</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  	<div id="" style="background:url(../assets/img/futbol.jpg) ">
+  			<div class="card col-md-6" >
   				<div class="card-body">
   					<form id="login-form" >
   						<div class="form-group">
@@ -91,7 +74,7 @@ header("location:index.php?page=home");
   		</div>
    
 
-  </main>
+  
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 

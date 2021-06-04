@@ -11,9 +11,9 @@ include 'admin/db_connect.php';
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end mb-4 page-title">
-                    	<h3 class="text-white">Bienvenido a <?php echo $_SESSION['setting_name']; ?></h3>
+                    	<h3 class="text-white">Bienvenido al <?php echo $_SESSION['setting_name']; ?></h3>
                         <hr class="divider my-4" />
-                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="index.php?page=doctors">Figurar Predios</a>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="index.php?page=predios">Seleccionar Predio</a>
 
                     </div>
                     
@@ -27,7 +27,7 @@ include 'admin/db_connect.php';
             <div class="container-fluid p-0">
                 <div class="row">
                     <div class="col-lg-12 text-center" style="background-color:lightyellow ; border-radius: 20px; " >
-                    <h2 class="mb-4">Tipos de Predios asociados</h2>
+                    <h2 class="mb-4">PREDIOS ASOCIADOS</h2>
 
                     <hr class="divider">
 
@@ -39,7 +39,7 @@ include 'admin/db_connect.php';
                                 while($row=$cats->fetch_assoc()):
                     ?>
                     <div class="col-lg-4 col-sm-6" >
-                        <a class="portfolio-box" href="index.php?page=doctors&sid=<?php echo $row['id'] ?>" >
+                        <a class="portfolio-box" href="index.php?page=predios&sid=<?php echo $row['id'] ?>" >
                             <img class="img-fluid" src="assets/img/<?php echo $row['img_path'] ?>" style=" border-radius: 20px; border-top: 5px" />
                             <div class="portfolio-box-caption">
                                 <div class="project-name"><?php echo $row['name'] ?></div>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+    ob_start();
 include ('db_connect.php');
 $doctor= $conn->query("SELECT * FROM doctors_list ");
 	while($row = $doctor->fetch_assoc()){
@@ -9,15 +10,9 @@ $doctor= $conn->query("SELECT * FROM doctors_list ");
 	while($row = $patient->fetch_assoc()){
 		$p_arr[$row['id']] = $row;
 	}
-	if(isset($_GET['id'])){
-	$qry = $conn->query("SELECT * FROM appointment_list where id =".$_GET['id']);
-	foreach ($qry->fetch_array() as $key => $value) {
-		$$key = $value;
-	}
-
-	}
+	
 if(isset($_GET['id'])){
-	$cancha = $conn->query("SELECT * FROM canchas where id =".$_GET['id']);
+	$cancha = $conn->query("SELECT * FROM canchas ");
 	while($row = $cancha->fetch_assoc()){
 		$can_arr[$row['id']] = $row;
 }
@@ -25,7 +20,7 @@ if(isset($_GET['id'])){
 
 	}
 	if(isset($_GET['id'])){
-	$horario = $conn->query("SELECT * FROM horarios where id =".$_GET['id']);
+	$horario = $conn->query("SELECT * FROM horarios ");
 	while($row = $horario->fetch_assoc()){
 		$hor_arr[$row['id']] = $row;
 }
@@ -50,9 +45,37 @@ if(isset($_GET['id'])){
 				<select class="browser-default custom-select select2" name="doctor_id">
 					<option value=""></option>
 					<?php foreach($doc_arr as $row): ?>
-					<option value="<?php echo $row['id'] ?>" <?php echo isset($doctor_id) && $doctor_id == $row['id'] ? 'selected' : '' ?>><?php echo "".$row['name'].', '.$row['name'] ?></option>
+					<option value="<?php echo $row['id'] ?>" <?php echo isset($doctor_id) && $doctor_id == $row['id'] ? 'selected' : '' ?>><?php echo "".$row['name'] ?></option>
 					<?php endforeach; ?>
 				</select>
+			</div>
+			
+			
+			<div class="form-group">
+				<label for="" class="control-label">Precio hora</label>
+				<select class="browser-default custom-select select2" name="">
+					<option value="<?php echo isset($id_horario) ? date("H:i",strtotime($id_horario)) : '' ?>"></option>
+					<?php foreach($hor_arr as $row): ?>
+					<option value="<?php echo $row['id'] ?>" <?php echo isset($id_horario) && $id_horario == $row['id'] ? 'selected' : '' ?>><?php echo "" .$row['precio'] ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+
+		<?php endif; ?>
+			<div class="form-group">
+				<label for="" class="control-label">Cliente</label>
+				<select class="browser-default custom-select select2" name="patient_id">
+					<option value=""></option>
+					<?php foreach($p_arr as $row): ?>
+					<option value="<?php echo $row['id'] ?>" <?php echo isset($patient_id) && $patient_id == $row['id'] ? 'selected' : '' ?> required><?php echo $row['name'] ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+			 
+					  <input class="form-control" type="text"  name="id_canchas" id="id_canchas" value="<?php echo $_GET['id'] ?>" class="" >
+			<div class="form-group">
+				<label for="" class="control-label">Fecha</label>
+				<input type="date"  name="date" class="form-control" value="<?php echo isset($schedule) ? date("Y-m-d",strtotime($schedule)) : '' ?>" required>
 			</div>
 			<div class="form-group">
 				<label for="" class="control-label">Canchas</label>
@@ -66,31 +89,13 @@ if(isset($_GET['id'])){
 			<div class="form-group">
 				<label for="" class="control-label">Hora</label>
 				<select class="browser-default custom-select select2" name="id_horario">
-					<option value="<?php echo isset($schedule) ? date("H:i",strtotime($schedule)) : '' ?>"></option>
+					<option value="<?php echo isset($id_horario) ? date("H:i",strtotime($id_horario)) : '' ?>"></option>
 					<?php foreach($hor_arr as $row): ?>
-					<option value="<?php echo $row['id'] ?>" <?php echo isset($id_horario) && $id_horario == $row['id'] ? 'selected' : '' ?>><?php echo "".$row['inicio'].', '.$row['precio'] ?></option>
+					<option value="<?php echo $row['id'] ?>" <?php echo isset($id_horario) && $id_horario == $row['id'] ? 'selected' : '' ?>><?php echo "".$row['inicio']?></option>
 					<?php endforeach; ?>
 				</select>
-			</div>
-		<?php endif; ?>
-			<div class="form-group">
-				<label for="" class="control-label">Clientes</label>
-				<select class="browser-default custom-select select2" name="patient_id">
-					<option value=""></option>
-					<?php foreach($p_arr as $row): ?>
-					<option value="<?php echo $row['id'] ?>" <?php echo isset($patient_id) && $patient_id == $row['id'] ? 'selected' : '' ?> required><?php echo $row['name'] ?></option>
-					<?php endforeach; ?>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="" class="control-label">Fecha</label>
-				<input type="date"  name="date" class="form-control" value="<?php echo isset($schedule) ? date("Y-m-d",strtotime($schedule)) : '' ?>" required>
 			</div>
 
-			<!--<div class="form-group">
-				<label for="" class="control-label">Hora</label>
-				<input type="time"  name="time" class="form-control" value="<?php echo isset($schedule) ? date("H:i",strtotime($schedule)) : '' ?>" required>-->
-			</div>
 			<div class="form-group">
 				<label for="" class="control-label">Status</label>
 				<select class="browser-default custom-select" name="status">
@@ -112,12 +117,28 @@ if(isset($_GET['id'])){
 </div>
 
 <script>
+	$(document).ready(function(){
+$("#date").change(function(e)
+{
+	e.preventDefault()
+	var cancha= $("#id_canchas").val();
+	var dt = $("#date").val();
+	$.ajax({
+    type:"POST",
+    data:"dt="+$('#date').val()+"&cancha="+$('#id_canchas').val(),
+    url:'busca_horario.php',
+    success:function(datos) {
+    $('#horarios').html(datos);
+          }
+	    });
+      });
+  });
 	
 	$("#manage-appointment").submit(function(e){
 		e.preventDefault()
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=set_appointment',
+			url:'ajax.php?action=reserva_turno',
 			method:'POST',
 			data:$(this).serialize(),
 			success:function(resp){

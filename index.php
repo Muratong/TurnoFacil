@@ -42,10 +42,10 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=home">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=doctors"></span>Predios/Canchas</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=predios"></span>Predios/Canchas</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=about">Acerca de</a></li>
                         <?php if(isset($_SESSION['login_id'])): ?>
-                          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=#.">Mis Turnos</a></li>
+                          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=misturnos">Mis Turnos</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="admin/ajax.php?action=logout2"><?php echo " ".$_SESSION['login_name'] ?> <i class="fa fa-power-off"></i></a></li>
                       <?php else: ?>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:void(0)" id="login_now">Login</a></li>

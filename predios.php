@@ -18,7 +18,7 @@
                 </div>
             </div>
         </header>
-	<section class="page-section" id="doctors" >
+	<section class="page-section" id="predios" >
         <div class="container">
         	<div class="card">
         		<div class="card-body" style="background-color:lightgreen; border-radius: 40px ">
@@ -29,7 +29,7 @@
 							<?php
 								$s = $conn->query("SELECT * from medical_specialty where id = ".$_GET['sid'])->fetch_array()['name'];
 							?>
-				<h2><b>Canchas Asociados <?php echo $s ?></b></h2>
+				<h2><b>Predios Asociados de categoria ( <?php echo $s ?>)</b></h2>
 						</div>
 						</div>
 					<hr class="divider">
@@ -51,7 +51,7 @@
 		
 						 <h4><p><small>Ubicacion: <b><?php echo $row['clinic_address'] ?></b></small></p></h4>
 						 <h3><p> <b><?php echo $row['contact'] ?></b></p></h3>
-						 <p><a href="javascript:void(0)" class="view_schedule" data-id="<?php echo $row['id'] ?>" data-name="<?php echo "".$row['name'].', '.$row['name_pref'] ?>"><i class='fa fa-calendar'></i> Horarios Laborales</a></b></p>
+						 <p><a href="javascript:void(0)" class="ver_calendario" data-id="<?php echo $row['id'] ?>" data-name="<?php echo "".$row['name'].', '.$row['name_pref'] ?>"><i class='fa fa-calendar'></i> Horarios Laborales</a></b></p>
 						 <p><b>Categorias de Canchas disponibles:</b></p>
                          
 						 <div>
@@ -66,7 +66,7 @@
 					</div>
 					<br>
 					<div class="col-md-3 text-center align-self-end-sm">
-						<button class="btn-outline-primary  btn  mb-4 set_appointment" type="button" data-id="<?php echo $row['id'] ?>"  data-name="<?php echo "".$row['name'].', '.$row['name_pref'] ?>">Ver Canchas</button>
+						<button class="btn-outline-primary  btn  mb-4 programar_turno" type="button" data-id="<?php echo $row['id'] ?>"  data-name="<?php echo "".$row['name'].', '.$row['name_pref'] ?>">Ver Canchas</button>
 					</div>
 					</div>
 				<hr class="divider" style="max-width: 60vw">
@@ -77,23 +77,24 @@
         </div>
     </section>
     <style>
-    	#doctors img{
+    	#predios img{
     		max-height: 300px;
     		max-width: 200px; 
     	}
     </style>
     <script>
         
-       $('.view_schedule').click(function(){
-			uni_modal($(this).attr('data-name')+" ------* Horarios*------","view_doctor_schedule.php?id="+$(this).attr('data-id'))
+       $('.ver_calendario').click(function(){
+			uni_modal($(this).attr('data-name')+" --> /Calendario/","ver_calendario_predios.php?id="+$(this).attr('data-id'))
 		})
-       $('.set_appointment').click(function(){
+       $('.programar_turno').click(function(){
        	if('<?php echo isset($_SESSION['login_id']) ?>' == 1)
-			uni_modal("Ver Canchas de: "+$(this).attr('data-name'),"set_appointment.php?id="+$(this).attr('data-id'),'')
+			uni_modal("Ver Canchas de: "+$(this).attr('data-name'),"programar_turno.php?id="+$(this).attr('data-id'),'')
 		else{
 			uni_modal("Logea primero","login.php")
 		}
 		})
+     
         
     </script> 
 	

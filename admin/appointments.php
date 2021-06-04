@@ -9,30 +9,30 @@
 	while($row = $patient->fetch_assoc()){
 		$p_arr[$row['id']] = $row;
 	}
-	//$cancha= $conn->query("SELECT * FROM canchas ");
-	//while($row = $cancha->fetch_assoc()){
-	//	$c_arr[$row['id']] = $row;
-	//}
-	//$horario= $conn->query("SELECT * FROM horarios ");
-	//while($row = $horario->fetch_assoc()){
-	//	$h_arr[$row['id']] = $row;
-	//}
+	$cancha= $conn->query("SELECT * FROM canchas ");
+	while($row = $cancha->fetch_assoc()){
+		$c_arr[$row['id']] = $row;
+	}
+	$horario= $conn->query("SELECT * FROM horarios ");
+	while($row = $horario->fetch_assoc()){
+		$h_arr[$row['id']] = $row;
+	}
 ?>
 <div class="container-fluid">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body">
-				<button class="btn-primary btn btn-sm" type="button" id="new_appointment"><i class="fa fa-plus"></i> Nuevo Turno</button>
+				<button class="btn-primary btn btn-sm new_appointment" type="button" data-id="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>" ><i class="fa fa-plus"></i> Nuevo Turno</button>
 				<br>
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
 						<th>Dias & Horas</th>
 						<th>Predios</th>
-						<!--<th>Cancha</th>-->
+						<th>Cancha</th>
 						<th>Clientes</th>
-						<!--<th>Turno</th>-->
-						<!--<th>Precio</th>-->
+						<th>Turno</th>
+						<th>Precio</th>
 						<th>Estados</th>
 						<th>Accion</th>
 					</tr>
@@ -47,13 +47,30 @@
 					while($row = $qry->fetch_assoc()):
 					?>
 					<tr>
-						<td><?php echo date("l M d, Y h:i A",strtotime($row['schedule'])) ?></td>
-						<td><?php echo "".$doc_arr[$row['doctor_id']]['name'].', '.$doc_arr[$row['doctor_id']]['name'] ?></td>
-						<!--<td><?php //echo $c_arr[$row['id_canchas']]['name'] ?></td>-->
-						<td><?php echo $p_arr[$row['patient_id']]['name'] ?></td>
-                        <!--<td><?php// echo $h_arr[$row['id_horario']]['inicio'] ?></td>-->
-                        <!--<td><?php //echo $h_arr[$row['id_horario']]['precio'] ?></td>-->
-						<td>
+						<td class="text-center"><?php echo date("l M d, Y h:i A",strtotime($row['schedule'])) ?></td>
+						<td class="text-center"><?php echo "".$doc_arr[$row['doctor_id']]['name'] ?></td>
+						<td class="text-center"><span class="badge badge-primary"><?php echo $c_arr[$row['id_canchas']]['nombre'] ?></span></td>
+						<td class="text-center"><?php echo $p_arr[$row['patient_id']]['name'] ?></td>
+                        <td class="text-center" >
+                           <?php if($row['status'] == 0): ?>
+                        	<span class="badge badge-warning"><?php echo $h_arr[$row['id_horario']]['inicio'] ?>
+                        	</span>
+                        	<?php endif ?>
+                        	 <?php if($row['status'] == 1): ?>
+                        	<span class="badge badge-primary"><?php echo $h_arr[$row['id_horario']]['inicio'] ?>
+                        	</span>
+                        	<?php endif ?>
+                        	 <?php if($row['status'] == 2): ?>
+                        	<span class="badge badge-info"><?php echo $h_arr[$row['id_horario']]['inicio'] ?>
+                        	</span>
+                        	<?php endif ?>
+                        	 <?php if($row['status'] == 3): ?>
+                        	<span class="badge badge-danger"><?php echo $h_arr[$row['id_horario']]['inicio'] ?>
+                        	</span>
+                        	<?php endif ?>
+                        </td>
+                        <td class="text-center"><?php echo $h_arr[$row['id_horario']]['precio'] ?></td>
+						<td class="text-center">
 							<?php if($row['status'] == 0): ?>
 								<span class="badge badge-warning">Pendiente</span>
 							<?php endif ?>
@@ -64,7 +81,7 @@
 								<span class="badge badge-info">Reprogramado</span>
 							<?php endif ?>
 							<?php if($row['status'] == 3): ?>
-								<span class="badge badge-info">Hecho</span>
+								<span class="badge badge-danger">Jugado</span>
 							<?php endif ?>
 						</td>
 						<td class="text-center">
@@ -79,14 +96,24 @@
 		</div>
 	</div>
 </div>
+<style>
+	
+	td{
+		vertical-align: middle !important;
+	}
+	td p{
+		margin: unset
+	}
+	
+</style>
 <script>
 	$('.update_app').click(function(){
-		uni_modal("Editar Turno","set_appointment.php?id="+$(this).attr('data-id'),"mid-large")
+		uni_modal("Editar Turno","set_appointment.php?id="+$(this).attr('data-id'),"")
 	})
-	$('#new_appointment').click(function(){
-		uni_modal("Agregar Turno","set_appointment.php","mid-large")
+	$('.new_appointment').click(function(){
+		uni_modal("Agregar Turno","set_appointment.php?id="+$(this).attr('data-id'),'')
 	})
-	$('.delete_app').click(function(){
+	$('.delete_app').click(function(){ 
 		_conf("¿Estas seguro de Eliminar el turno?","delete_app",[$(this).attr('data-id')])
 	})
 	function delete_app($id){

@@ -6,31 +6,31 @@
 		<div class="row">
 			<!-- FORM Panel -->
 			<div class="col-md-4">
-			<form action="" id="manage-doctor">
+			<form action="" id="manage-predios"> 
 				<div class="card">
 					<div class="card-header">
-						 <h4 style="color:blue"> Actualiza tu Predio</h4>
+						  <h4 style="color:blue"> Dar alta Predios</h4>
 				  	</div>
 					<div class="card-body">
 							<div id="msg"></div>
-							<input type="hidden" name="id">
-							<div class="form-group">
-								<label for="" class="control-label">Prefix</label>
-								<input type="text" class="form-control" name="name_pref" placeholder="" required="">
+				<input type="hidden" name="id">
+				<div class="form-group">
+				<label for="" class="control-label">Prefix Predio</label>
+						<input type="text" class="form-control" name="name_pref" placeholder="" required="">
 							</div>
-							<div class="form-group">
-								<label class="control-label">Nombre</label>
+						<div class="form-group">
+						<label class="control-label">Nombre</label>
 								<textarea name="name" id="" cols="30" rows="2" class="form-control" required=""></textarea>
 							</div>
-							<div class="form-group">
-								<label class="control-label">Tipo Canchas</label>
-								<select name="specialty_ids[]" id="" multiple=""  class="custom-select browser-default select2">
-									<option value=""></option>
+						<div class="form-group">
+						<label class="control-label">Tipo Canchas</label>
+						<select name="specialty_ids[]" id="" multiple=""  class="custom-select browser-default select2">
+							<option value=""></option>
 									<?php 
-									$qry = $conn->query("SELECT * FROM medical_specialty order by name asc");
-										while($row=$qry->fetch_assoc()):
+						$qry = $conn->query("SELECT * FROM medical_specialty order by name asc");
+						while($row=$qry->fetch_assoc()):
 									 ?>
-									<option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+							<option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
 									<?php endwhile; ?>
 								</select>
 							</div>
@@ -44,15 +44,15 @@
 							</div>
 							<div class="form-group">
 								<label for="" class="control-label">Email</label>
-								<input type="email" class="form-control" name="email" required="" readonly="">
+								<input type="email" class="form-control" name="email" required="">
 							</div>
 							<div class="form-group">
 								<label for="" class="control-label">Password</label>
-								<input type="password" class="form-control" name="password" readonly="">
+								<input type="password" class="form-control" name="password" >
 							</div>
 							<div class="form-group">
 								<label for="" class="control-label">Imagen</label>
-								<input type="file" class="form-control" name="img" onchange="displayImg(this,$(this))">
+							<input type="file" class="form-control" name="img" onchange="displayImg(this,$(this))">
 							</div>
 							<div class="form-group">
 								<img src="" alt="" id="cimg">
@@ -64,8 +64,8 @@
 					<div class="card-footer">
 						<div class="row">
 							<div class="col-md-12">
-								<button class="btn btn-sm btn-primary col-sm-4 offset-md-3">Actualizar</button>
-								<button class="btn btn-sm btn-danger col-sm-4" type="button" onclick="_reset()"> Cancelar</button>
+					<button class="btn btn-sm btn-primary col-sm-4 offset-md-3">Guardar</button>
+					<button class="btn btn-sm btn-danger col-sm-4" type="button" onclick="_reset()"> Cancelar</button>
 							</div>
 						</div>
 					</div>
@@ -81,37 +81,34 @@
 						<table class="table table-bordered table-hover">
 							<thead> 
 								<tr>
-									<th class="text-center">#</th>
-									<th class="text-center">Imagen</th>
-									<th class="text-center">Info</th>
-									<th class="text-center">Accion</th>
+								<th class="text-center">#</th>
+								<th class="text-center">Imagen</th>
+								<th class="text-center">Info</th>
+								<th class="text-center">Accion</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php 
-					$where = '';
-					if($_SESSION['login_type'] == 2)
-						$where = " where id = ".$_SESSION['login_doctor_id'];
-
-					$qry = $conn->query("SELECT * FROM doctors_list ".$where." order by id desc ");
-					while($row = $qry->fetch_assoc()):
-					?>
+								$i = 1;
+				$cats = $conn->query("SELECT * FROM doctors_list order by id asc");
+				while($row=$cats->fetch_assoc()):
+								?>
 								<tr>
-									<td class="text-center"></td>
+					<td class="text-center"><?php echo $i++ ?></td>
 									<td class="text-center">
-										<img src="../assets/img/<?php echo $row['img_path'] ?>" alt="">
+				<img src="../assets/img/<?php echo $row['img_path'] ?>" alt="">
 									</td>
-									<td class="">
-										 <p>Nombre: <b><?php echo " ".$row['name'].', '.$row['name_pref'] ?></b></p>
-										 <p><small>Email: <b><?php echo $row['email'] ?></b></small></p>
-										 <p><small>Ubicacion: <b><?php echo $row['clinic_address'] ?></b></small></p>
-										 <p><small>Telefono #: <b><?php echo $row['contact'] ?></b></small></p>
-										 <p><small><a href="javascript:void(0)" class="view_schedule" data-id="<?php echo $row['id'] ?>" data-name="<?php echo "".$row['name'].', '.$row['name_pref'] ?>"><i class='fa fa-calendar'></i> <strong> Horarios de trabajo</strong></a></b></small></p>
+			<td class="">
+				 <p>Nombre: <b><?php echo "".$row['name'].', '.$row['name_pref'] ?></b></p>
+				 <p><small>Email: <b><?php echo $row['email'] ?></b></small></p>
+				 <p><small>Ubicacion: <b><?php echo $row['clinic_address'] ?></b></small></p>
+				 <p><small>Telefono #: <b><?php echo $row['contact'] ?></b></small></p>
+			 <p><small><a href="javascript:void(0)" class="ver_calendario" data-id="<?php echo $row['id'] ?>" data-name="<?php echo "".$row['name'].', '.$row['name_pref'] ?>"><i class='fa fa-calendar'></i> Horarios</a></b></small></p>
 
-									</td>
-									<td class="text-center">
-										<button class="btn btn-sm btn-primary edit-doctor" type="button" data-id="<?php echo $row['id'] ?>" data-name="<?php echo $row['name'] ?>" data-name_pref="<?php echo $row['name_pref'] ?>" data-clinic_address="<?php echo $row['clinic_address'] ?>" data-contact="<?php echo $row['contact'] ?>"  data-img_path="<?php echo $row['img_path'] ?>" data-specialty_ids="<?php echo $row['specialty_ids'] ?>" data-email="<?php echo $row['email'] ?>">Editar</button>
-										<button class="btn btn-sm btn-danger delete_doctor" type="button" data-id="<?php echo $row['id'] ?>">Eliminar</button>
+			</td>
+	<td class="text-center">
+	<button class="btn btn-sm btn-primary editar-predios" type="button" data-id="<?php echo $row['id'] ?>" data-name="<?php echo $row['name'] ?>" data-name_pref="<?php echo $row['name_pref'] ?>" data-clinic_address="<?php echo $row['clinic_address'] ?>" data-contact="<?php echo $row['contact'] ?>"  data-img_path="<?php echo $row['img_path'] ?>" data-specialty_ids="<?php echo $row['specialty_ids'] ?>" data-email="<?php echo $row['email'] ?>">Editar</button>
+		<button class="btn btn-sm btn-danger delete_predios" type="button" data-id="<?php echo $row['id'] ?>">Eliminar</button>
 									</td>
 								</tr>
 								<?php endwhile; ?>
@@ -139,21 +136,22 @@
 	}
 </style>
 <script>
+	
 	$('.select2').select2({
 		placeholder:" Selecciona aqui",
 		width:'100%'
 	})
 	function _reset(){
 		$('[name="id"]').val('');
-		$('#manage-doctor').get(0).reset();
+		$('#manage-predios').get(0).reset();
 	}
 	$('table').dataTable()
-	$('#manage-doctor').submit(function(e){
+	$('#manage-predios').submit(function(e){
 		e.preventDefault()
 		start_load()
 		$('#msg').html('')
 		$.ajax({
-			url:'ajax.php?action=save_doctor',
+			url:'ajax.php?action=save_predios',
 			data: new FormData($(this)[0]),
 		    cache: false,
 		    contentType: false,
@@ -162,7 +160,7 @@
 		    type: 'POST',
 			success:function(resp){
 				if(resp==1){
-					alert_toast("Datos agregados correctamente",'success')
+					alert_toast("Datos agregados correctamente ", 'éxito')
 					setTimeout(function(){
 						location.reload()
 					},1500)
@@ -185,9 +183,9 @@
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
-	$('.edit-doctor').click(function(){
+	$('.editar-predios').click(function(){
 		start_load()
-		var cat = $('#manage-doctor')
+		var cat = $('#manage-predios')
 		cat.get(0).reset()
 		cat.find("[name='id']").val($(this).attr('data-id'))
 		cat.find("[name='name']").val($(this).attr('data-name'))
@@ -219,22 +217,22 @@
 		end_load()
 	})
 
-	$('.view_schedule').click(function(){
-		uni_modal($(this).attr('data-name')+" - Schedule","view_doctor_schedule.php?id="+$(this).attr('data-id'))
+	$('.ver_calendario').click(function(){
+		uni_modal($(this).attr('data-name')+" - Calendario","ver_calendario_predio.php?id="+$(this).attr('data-id'))
 	})
-	$('.delete_doctor').click(function(){
-		_conf("¿Estás seguro de eliminar a este Predio?","delete_doctor",[$(this).attr('data-id')])
+	$('.delete_predios').click(function(){
+		_conf("¿Estas seguro de eliminar el Predio?","delete_predios",[$(this).attr('data-id')])
 	})
 	
-	function delete_doctor($id){
+	function delete_predios($id){
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=delete_doctor',
+			url:'ajax.php?action=delete_predios',
 			method:'POST',
 			data:{id:$id},
 			success:function(resp){
 				if(resp==1){
-					alert_toast("Datos eliminados correctamente",'success')
+					alert_toast("Datos eliminados correctamente ",' éxito')
 					setTimeout(function(){
 						location.reload()
 					},1500)

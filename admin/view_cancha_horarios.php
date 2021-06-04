@@ -36,6 +36,6 @@
 </div>
 <script>
 	$('#edit').click(function(){
-		uni_modal("Editar "+$('#uni_modal .modal-title').html(),'manage_cancha_horarios.php?did=<?php echo $_GET['id'] ?>','mid-large');
+		uni_modal("Editar "+$('#uni_modal .modal-title').html(),'manage_cancha_horarios.php?did=<?php echo $_GET['id'] ?>','');
 	})
 </script>

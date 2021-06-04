@@ -9,13 +9,13 @@
 			<form action="" id="manage-doctor">
 				<div class="card">
 					<div class="card-header">
-						  <h4 style="color:blue"> Dar alta Predios</h4>
+						 <h4 style="color:blue"> Actualiza tu Predio</h4>
 				  	</div>
 					<div class="card-body">
 							<div id="msg"></div>
 							<input type="hidden" name="id">
 							<div class="form-group">
-								<label for="" class="control-label">Prefix Predio</label>
+								<label for="" class="control-label">Prefix</label>
 								<input type="text" class="form-control" name="name_pref" placeholder="" required="">
 							</div>
 							<div class="form-group">
@@ -44,11 +44,11 @@
 							</div>
 							<div class="form-group">
 								<label for="" class="control-label">Email</label>
-								<input type="email" class="form-control" name="email" required="">
+								<input type="email" class="form-control" name="email" required="" readonly="">
 							</div>
 							<div class="form-group">
 								<label for="" class="control-label">Password</label>
-								<input type="password" class="form-control" name="password" >
+								<input type="password" class="form-control" name="password" readonly="">
 							</div>
 							<div class="form-group">
 								<label for="" class="control-label">Imagen</label>
@@ -64,7 +64,7 @@
 					<div class="card-footer">
 						<div class="row">
 							<div class="col-md-12">
-								<button class="btn btn-sm btn-primary col-sm-4 offset-md-3">Guardar</button>
+								<button class="btn btn-sm btn-primary col-sm-4 offset-md-3">Actualizar</button>
 								<button class="btn btn-sm btn-danger col-sm-4" type="button" onclick="_reset()"> Cancelar</button>
 							</div>
 						</div>
@@ -89,21 +89,24 @@
 							</thead>
 							<tbody>
 								<?php 
-								$i = 1;
-								$cats = $conn->query("SELECT * FROM doctors_list order by id asc");
-								while($row=$cats->fetch_assoc()):
-								?>
+					$where = '';
+					if($_SESSION['login_type'] == 2)
+						$where = " where id = ".$_SESSION['login_doctor_id'];
+
+					$qry = $conn->query("SELECT * FROM doctors_list ".$where." order by id desc ");
+					while($row = $qry->fetch_assoc()):
+					?>
 								<tr>
-									<td class="text-center"><?php echo $i++ ?></td>
+									<td class="text-center"></td>
 									<td class="text-center">
 										<img src="../assets/img/<?php echo $row['img_path'] ?>" alt="">
 									</td>
 									<td class="">
-										 <p>Nombre: <b><?php echo "Dr. ".$row['name'].', '.$row['name_pref'] ?></b></p>
+										 <p>Nombre: <b><?php echo " ".$row['name'].', '.$row['name_pref'] ?></b></p>
 										 <p><small>Email: <b><?php echo $row['email'] ?></b></small></p>
 										 <p><small>Ubicacion: <b><?php echo $row['clinic_address'] ?></b></small></p>
 										 <p><small>Telefono #: <b><?php echo $row['contact'] ?></b></small></p>
-										 <p><small><a href="javascript:void(0)" class="view_schedule" data-id="<?php echo $row['id'] ?>" data-name="<?php echo "Dr. ".$row['name'].', '.$row['name_pref'] ?>"><i class='fa fa-calendar'></i> Horarios</a></b></small></p>
+										 <p><small><a href="javascript:void(0)" class="view_schedule" data-id="<?php echo $row['id'] ?>" data-name="<?php echo "".$row['name'].', '.$row['name_pref'] ?>"><i class='fa fa-calendar'></i> <strong> Horarios de trabajo</strong></a></b></small></p>
 
 									</td>
 									<td class="text-center">
@@ -136,7 +139,6 @@
 	}
 </style>
 <script>
-	
 	$('.select2').select2({
 		placeholder:" Selecciona aqui",
 		width:'100%'
@@ -160,14 +162,14 @@
 		    type: 'POST',
 			success:function(resp){
 				if(resp==1){
-					alert_toast("Data successfully added",'success')
+					alert_toast("Datos agregados correctamente",'success')
 					setTimeout(function(){
 						location.reload()
 					},1500)
 
 				}
 				else if(resp==2){
-					$('#msg').html('<div class="alert alert-danger">Email already exist.</div>')
+					$('#msg').html('<div class="alert alert-danger">Ya existe el correo electrónico.</div>')
 					end_load()
 				}
 			}
@@ -221,7 +223,7 @@
 		uni_modal($(this).attr('data-name')+" - Schedule","view_doctor_schedule.php?id="+$(this).attr('data-id'))
 	})
 	$('.delete_doctor').click(function(){
-		_conf("Are you sure to delete this doctor?","delete_doctor",[$(this).attr('data-id')])
+		_conf("¿Estás seguro de eliminar a este Predio?","delete_doctor",[$(this).attr('data-id')])
 	})
 	
 	function delete_doctor($id){
@@ -232,7 +234,7 @@
 			data:{id:$id},
 			success:function(resp){
 				if(resp==1){
-					alert_toast("Data successfully deleted",'success')
+					alert_toast("Datos eliminados correctamente",'success')
 					setTimeout(function(){
 						location.reload()
 					},1500)

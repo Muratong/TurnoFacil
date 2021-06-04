@@ -153,8 +153,8 @@ Class Action {
 		if($delete)
 			return 1;
 	}
-	function save_doctor(){
-		extract($_POST);
+	function save_predios(){
+		extract($_POST); 
 		$data = " name = '$name' ";
 		$data .= ", name_pref = '$name_pref' ";
 		$data .= ", clinic_address = '$clinic_address' ";
@@ -216,7 +216,7 @@ Class Action {
 			return 1;
 	}
 
-	function save_schedule(){
+	function save_calendario(){
 		extract($_POST);
 		foreach($days as $k => $val){
 			$data = " doctor_id = '$doctor_id' ";
@@ -315,7 +315,7 @@ function save_horario(){
 			return json_encode(array('status'=>1));
 		}
 	}
-	function delete_appointment(){
+	function delete_turno(){
 		extract($_POST);
 		$delete = $this->db->query("DELETE FROM appointment_list where id = ".$id);
 		if($delete)

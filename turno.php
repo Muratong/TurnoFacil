@@ -12,9 +12,9 @@ $fecha=date("d-m-y");
    <div class="container h-10">
    <div class="row h-10 align-items-center justify-content-center text-center">
     <div class="col-lg-10 align-self-end mb-4 page-title">
-    <h3 class="text-white">Reserva tu hora en <?php echo $_SESSION['setting_name']; ?></h3>
+    <h3 class="text-white">Reserva tu hora en el <?php echo $_SESSION['setting_name']; ?></h3>
    <hr class="divider my-4" />
-   <a class="btn btn-primary btn-xl js-scroll-trigger" href="index.php?page=doctors">Ver  Los  Predios</a>
+   <a class="btn btn-primary btn-xl js-scroll-trigger" href="index.php?page=predios">Ver  Los  Predios</a>
 
                     </div>
                     
@@ -34,7 +34,7 @@ $fecha=date("d-m-y");
 							
 									<?php 
 									?>
-									<div class="alert alert-info" ><strong><a style="color: green">  SELECIONADA :</a> <?php echo "".$row['name'].', '.$row['name_pref'] ?></strong> / Elija tu cancha </div>
+									<div class="alert alert-info" ><strong><a style="color: green">  SELECIONADA :</a> <?php echo "".$row['name'].', '.$row['name_pref'] ?></strong> / Elije tu cancha </div>
 									</p>
 					<?php ?>
 

@@ -40,10 +40,10 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=home">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=doctors"></span>Predios/Canchas</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=predios"></span>Predios/Canchas</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=about">Acerca de</a></li>
                         <?php if(isset($_SESSION['login_id'])): ?>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=#.">Mis Turnos</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=misturnos">Mis Turnos</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="admin/ajax.php?action=logout2"><i class="fa fa-power-off"></i><?php echo " ".$_SESSION['login_name'] ?> </a></li>
                       <?php else: ?>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:void(0)" id="login_now">Login</a></li>
@@ -67,8 +67,8 @@
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-data-preference-id="291527786-6ccc3e43-d5bb-40f6-918c-69c707cc9d84" data-source="button" onclick="$('#uni_modal form').submit()" >
+      <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+       data-preference-id="https://mpago.la/" data-source="button" onclick="$('#uni_modal form').submit()" >
        </script>
         
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

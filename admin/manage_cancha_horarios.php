@@ -27,7 +27,7 @@ while($row=$qry->fetch_assoc()){
 					<tr>
 						<th class="text-center"></th>
 						<th class="text-center">Nº</th>
-						<th class="text-center">Desde</th>
+						<th class="text-center">De</th>
 						<th class="text-center">A</th>
 						<th class="text-center">precio</th>
 					</tr>

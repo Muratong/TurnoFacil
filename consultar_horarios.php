@@ -5,7 +5,7 @@ include ('admin/db_connect.php')
 ?>
 <style>
 	#uni_modal .modal-footer{
-		display: block;
+		display: none;
 	}
 </style>
 <div class="container-fluid">
@@ -33,11 +33,11 @@ include ('admin/db_connect.php')
     </div>
 		  <input class="form-control" type="hidden"  name="id_canchas" id="id_canchas" value="<?php echo $_GET['id'] ?>" class="" >
 			         <?php if(isset($_SESSION['login_id'])): ?>
-			<label for="" class="control-label">Telefono</label>
-            <input class="form-control" type="text"  name="telefono" id="telefono" value="<?php echo " ".$_SESSION['login_contact'] ?>" class="" required="">
+			<!--<label for="" class="control-label">Telefono</label>-->
+            <input class="form-control" type="hidden"  name="telefono" id="telefono" value="<?php echo " ".$_SESSION['login_contact'] ?>" class="" required="">
                       <?php endif; ?>
 	<div class="form-group">
-			<label for="" class="control-label">Fecha</label>
+			<label for="" class="control-label">Seleccionar el dia</label>
 			<input class="form-control" type="date" value="" id="date" name="date" class="form" required>
     	
 	</div>
@@ -46,7 +46,7 @@ include ('admin/db_connect.php')
 	<div class="form-group">
 	<div id="turnos"></div>
 	</div>
-              
+	 
 		</form>
 	</div>
 </div>
@@ -81,9 +81,10 @@ $("#date").change(function(e)
 			success:function(resp){
 				resp = JSON.parse(resp)
 				if(resp.status == 1){
-					alert_toast("Solicitaste tu turno con exito!");
+					alert_toast("El turno se Genero con exito!");
 					end_load();
 					$('.modal').modal("hide");
+					window.location.replace("https://mpago.la/1GmzRm8");
 				}else{
 					$('#msg').html('<div class="alert alert-danger">'+resp.msg+'</div>')
 					end_load();

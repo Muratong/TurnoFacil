@@ -16,7 +16,7 @@ while($row=$qry->fetch_assoc()){
 
 ?>
 <div class="container-fluid">
-	<form  id="manage-schedule">
+	<form  id="calendario">
 		<input type="hidden" name="doctor_id" value="<?php echo $_GET['did'] ?>">
 	<div class="col-lg-12">
 		<div class="row">
@@ -32,7 +32,7 @@ while($row=$qry->fetch_assoc()){
 				</thead>
 				<tbody>
 					<?php 
-					$days = array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday");
+					$days = array("Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo");
 					for($i = 0 ; $i < 7;$i++):
 					?>
 					<tr>
@@ -56,20 +56,20 @@ while($row=$qry->fetch_assoc()){
 </div>
 
 <script>
-	$("#manage-schedule").submit(function(e){
+	$("#calendario").submit(function(e){
 		e.preventDefault()
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=save_schedule',
+			url:'ajax.php?action=save_calendario',
 			method:"POST",
 			data:$(this).serialize(),
 			success:function(resp){
 				if(resp==1){
-					alert_toast("Data successfully saved","success");
+					alert_toast("Datos guardados correctamente "," éxito ");
 					var title = $("#uni_modal .modal-title").html();
-					title.replace("Edit ",'')
+					title.replace("Editar ",'')
 					end_load()
-					uni_modal(title,'view_doctor_schedule.php?id=<?php echo $_GET['did'] ?>')
+					uni_modal(title,'ver_calendario_predio.php?id=<?php echo $_GET['did'] ?>')
 				}
 			}
 		})

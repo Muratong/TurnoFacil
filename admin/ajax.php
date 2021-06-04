@@ -54,18 +54,18 @@ if($action == "delete_category"){
 	if($save)
 		echo $save;
 }
-if($action == "save_doctor"){
-	$save = $crud->save_doctor();
+if($action == "save_predios"){
+	$save = $crud->save_predios();
 	if($save)
 		echo $save;
 }
-if($action == "delete_doctor"){
+if($action == "delete_predios"){
 	$save = $crud->delete_doctor();
 	if($save)
 		echo $save;
 }
-if($action == "save_schedule"){
-	$save = $crud->save_schedule();
+if($action == "save_calendario"){
+	$save = $crud->save_calendario();
 	if($save)
 		echo $save;
 }
@@ -79,7 +79,7 @@ if($action == "delete_turno"){
 	if($save)
 		echo $save;
 }
-if($action == "update_appointment"){
+if($action == "update_turno"){
 	$save = $crud->update_appointment();
 	if($save)
 		echo $save;

@@ -14,7 +14,7 @@
 			<div class="col-lg-12">
 			<div class="card">
 				<div class="card-body">
-				<?php echo "Bienvenido ".($_SESSION['login_type'] == 3 ? "".$_SESSION['login_name'].','.$_SESSION['login_name_pref'] : $_SESSION['login_name'])."!"  ?>
+				<strong><?php echo "Bienvenido ".($_SESSION['login_type'] == 3 ? "".$_SESSION['login_name'].','.$_SESSION['login_name_pref'] : $_SESSION['login_name'])."!"   ?> </strong>en gestion de turnos online
 									
 				</div>
 				<hr>
