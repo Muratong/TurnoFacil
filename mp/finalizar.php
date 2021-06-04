@@ -40,7 +40,9 @@
 			</div>
 
 			<div class="enlace">
+               
 				<a href=" https://mpago.la/1GmzRm8">Finalizar</a>
+             
 			</div>
 		</div>
 
